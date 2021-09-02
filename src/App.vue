@@ -15,8 +15,10 @@
   color: #2c3e50;
 }
 
+$a:30px;
+
 #nav {
-  padding: 40px;
+  padding: $a;
   
   a {
     font-weight: bold;
