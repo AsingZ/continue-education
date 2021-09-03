@@ -11,4 +11,4 @@ installAxios(app)
 app.use(ElementPlus)
 app.use(router)
 app.use(store)
-app.mount('#app')
+app.mount('#app');

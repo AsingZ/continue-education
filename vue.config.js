@@ -23,4 +23,12 @@ module.exports = {
 		},
 	},
 	*/
+	// 配置 index.html中的htmlWebpackPlugin.options.title
+	// 用于显示标题
+	chainWebpack: config =>{
+		config.plugin('html').tap(args => {
+			args[0].title = '成都师范学院继续教育平台';
+			return args;
+		})
+	},
 };
