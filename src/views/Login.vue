@@ -30,7 +30,7 @@ justify-center flex-1">
 			<select v-model="roleValue" id="minimal" class="w-full px-8 py-4 rounded-lg font-medium
 			bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm
 			focus:outline-none focus:bg-white mt-5">
-					<option v-for="item in roleList" :value ="item.value">{{item.label}}</option>
+					<option v-for="item in roleList" :value ="item.id">{{item.name}}</option>
 			</select>
 
 			<!-- 下拉菜单 end -->
@@ -55,9 +55,10 @@ justify-center flex-1">
 </template>
 
 <script>
+import {mapState,mapMutations} from 'vuex'
 import ipconfig from "@/utils/ipconfig";
 import $ from "@/assets/js/jquery.min";
-import axios from "axios";
+import axios from "@/plugins/axios";
 import { ElMessage } from 'element-plus';
 
 export default {
@@ -68,26 +69,65 @@ data(){
 		roleValue: "",
 		account:"",
 		password:"",
-
 	}
 },
+computed:{
+	...mapState({
+	}),
+},
 methods: {
+	/**
+	 * 登录方法
+	 */
 	loginFrom(){
-		console.log(this.account)
-		console.log(this.password)
-		console.log(this.roleValue)
+		if (this.account==null||this.account==""){
+			ElMessage('账号不能为空！');
+			return ;
+		}
+		if (this.password==null||this.password==""){
+			ElMessage('密码不能为空！');
+			return ;
+		}
+
+		axios.post(ipconfig.address+"/common/login",{
+			account: this.account,
+			password: this.password,
+			roleId: this.roleValue
+		}).then((response)=>{
+			if(response.data.code!=200){
+				ElMessage('账号密码错误！');
+			}else{
+				this.$store.state.token="true";
+				//保存登录状态
+				window.localStorage.setItem("loged",true);
+				this.$router.push("/");
+			}
+		}).catch((error)=>{
+			console.log(error);
+			ElMessage('！错误');
+		});
 	}
 },
 created(){
 	// 加载角色数据
-	axios.get(ipconfig.address+"/data/role.json").then((response)=>{
+	axios.get(ipconfig.selfAddress+"/data/role.json").then((response)=>{
 		this.roleList=response.data;
 		// 设置默认选项
-		this.roleValue=this.roleList[0].value;
+		this.roleValue=this.roleList[0].id;
+	}).catch(()=>{
+		console.log("login.vue:88",error);
+		ElMessage('网络出错，请刷新重试！');
+	});
+	/*
+	axios.get(ipconfig.address+"/permission/roleList").then((response)=>{
+		this.roleList=response.data.data;
+		// 设置默认选项
+		this.roleValue=this.roleList[0].id;
 	}).catch((error)=>{
 		console.log("login.vue:88",error);
 		ElMessage('网络出错，请刷新重试！');
 	});
+	*/
 },
 mounted(){
 	// 登陆背景函数
@@ -97,28 +137,34 @@ mounted(){
 },
 watch:{
 	account(newVal,oldVal){
+		// 路由跳转时先执行了这个才加载的数据
+		if (this.roleList==null||this.roleList.length<1){
+			// 所以先做空值判断
+			return;
+		}
 		/**
 		 * 通过角色名称的名字来设置roleValue的值
 		 * @param strName
 		 */
 		let setRoleValueByRoleName = (strName)=>{
-			this.roleValue = this.roleValue=this.roleList.find(k =>k.label=== strName).value;
+			this.roleValue = this.roleValue=this.roleList.find(k =>k.name=== strName).id;
 		}
 
 		let len = newVal.length;
-		// 长度不变不换角色
-		if(len == oldVal.length)return;
-
 		if (len==12){
-			setRoleValueByRoleName("学员")
-		}else if(len == 8){
-			setRoleValueByRoleName("教师")
-		}else if(len == 4){
-			setRoleValueByRoleName("教务管理员")
+			setRoleValueByRoleName("学员");
+		}else if(len == 6){
+			axios.get(ipconfig.address+"/permission/roleId/"+newVal).then((response)=>{
+				// 这里返回的是roleId，直接设置进去
+				this.roleValue=response.data.data;
+			}).catch((error)=>{
+				console.log(error);
+			});
 		}else if(newVal === "admin"){
-			setRoleValueByRoleName("管理员")
+			setRoleValueByRoleName("管理员");
 		}
-	}
+	},
+
 },
 }
 </script>

@@ -1,16 +1,32 @@
-[{
-"value": 5,
-"label": "学员"
-}, {
-"value": 4,
-"label": "教师"
-}, {
-"value": 3,
-"label": "班主任"
-}, {
-"value": 2,
-"label": "教务管理员"
-}, {
-"value": 1,
-"label": "管理员"
-}]
+[
+  {
+    "id": 1,
+    "name": "管理员",
+    "description": null,
+    "createTime": "2021-09-06T11:37:06.000+00:00"
+  },
+  {
+    "id": 2,
+    "name": "教务管理员",
+    "description": null,
+    "createTime": "2021-09-06T11:37:06.000+00:00"
+  },
+  {
+    "id": 3,
+    "name": "教师",
+    "description": null,
+    "createTime": "2021-09-06T11:37:06.000+00:00"
+  },
+  {
+    "id": 4,
+    "name": "班主任",
+    "description": null,
+    "createTime": "2021-09-06T11:37:06.000+00:00"
+  },
+  {
+    "id": 5,
+    "name": "学员",
+    "description": null,
+    "createTime": "2021-09-06T11:37:06.000+00:00"
+  }
+]
