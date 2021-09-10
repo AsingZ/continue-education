@@ -56,13 +56,14 @@ justify-center flex-1">
 
 <script>
 import {mapState,mapMutations} from 'vuex'
-import ipconfig from "@/utils/ipconfig";
 import $ from "@/assets/js/jquery.min";
 import axios from "@/plugins/axios";
 import { ElMessage } from 'element-plus';
+import ipconfig from "@/utils/ipconfig";
+import roleHelper from "@/utils/roleHelper";
 
 export default {
-name: "login",
+name: "Login",
 data(){
 	return {
 		roleList:[],
@@ -97,10 +98,13 @@ methods: {
 			if(response.data.code!=200){
 				ElMessage('账号密码错误！');
 			}else{
-				this.$store.state.token="true";
 				//保存登录状态
+				this.$store.state.token="true";
 				window.localStorage.setItem("loged",true);
-				this.$router.push("/");
+				// 登录的角色数据
+				this.$store.state.roleId=this.roleValue;
+				// 跳转到对应页面
+				this.$router.push(roleHelper.getRouterStringByRoleId(this.roleValue));
 			}
 		}).catch((error)=>{
 			console.log(error);

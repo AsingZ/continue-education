@@ -1,0 +1,133 @@
+<template>
+<el-container class="box">
+	<!-- 页头 start -->
+	<el-header height="80px">
+		<logo-header :name="name"></logo-header>
+	</el-header>
+	<!-- 页头 end -->
+	<!-- 内容 start -->
+	<el-container>
+		<!-- 左边信息 start -->
+		<el-aside class="left" width="250px">
+			<el-tabs type="card">
+				<el-tab-pane label="课程通知">
+					<!-- 左边盒子 start -->
+					<div class="left-information">
+						<information-item title="关于课程作业的提交通知我我我我我我我我我" checked="" />
+						<div v-for="a in 5">
+							<information-item title="测试通知" checked="" @click="drawer = true" />
+						</div>
+
+						<el-drawer
+							title="测试通知"
+							v-model="drawer"
+							direction="rtl"
+							destroy-on-close>
+
+							<span>这里是通知内容</span>
+						</el-drawer>
+					</div>
+					<!-- 左边盒子 end -->
+				</el-tab-pane>
+			</el-tabs>
+		</el-aside>
+		<!-- 左边信息 end -->
+		<!-- 右边主体 start -->
+		<el-main>
+			<el-tabs type="card">
+				<el-tab-pane label="课程列表">
+					<!-- 右边盒子 start -->
+					<div class="course-list">
+						<div v-for="a in 20">
+							<a onclick="window.open('./#/courseDetailed/1','course')">
+							<course-list-item courseName="课程名称"
+											  courseId="123456"
+											  teacherName="教师名称" />
+							</a>
+						</div>
+					</div>
+					<!-- 右边盒子 start -->
+				</el-tab-pane>
+
+			</el-tabs>
+
+		</el-main>
+		<!-- 右边主体 start -->
+	</el-container>
+	<!-- 内容 end -->
+</el-container>
+</template>
+
+<script>
+import axios from "@/plugins/axios";
+import {ElMessage} from "element-plus";
+import ipconfig from "@/utils/ipconfig";
+import logoHeader from "@/components/LogoHeader";
+import SimpleCourseInfoItem from "@/components/SimpleCourseInfoItem";
+import SimpleInformationItem from "@/components/SimpleInformationItem";
+
+export default {
+name: "Student",
+data() {
+	return {
+		name:null,
+		drawer:false
+	}
+},
+beforeCreate(){
+	// 1. 先判断当前角色是否是学生
+	if(this.$store.state.roleId!=5){
+		// 不是跳到HOME
+		this.$router.push("/");
+	}
+
+	// 2.在加载之前获取登录信息
+	axios.get(ipconfig.address+"/common/logedInfo").then((response)=>{
+		if (response.data.code==200){
+			this.$store.state.logedInfo=response.data.data;
+			this.name=response.data.data.name;
+		}else{
+			ElMessage("状态异常");
+		}
+
+	}).catch((error)=>{
+		console.log(error);
+		console.log("student created error")
+	});
+},
+// 组件
+components:{
+	"logo-header":logoHeader,
+	"course-list-item":SimpleCourseInfoItem,
+	"information-item":SimpleInformationItem,
+},
+methods:{
+
+},
+}
+</script>
+
+<style lang="scss" scoped>
+
+.box{
+	width: 80%;
+	margin: 0 auto;
+
+	.left{
+		margin-top: 20px;
+		border-right: 1px solid #efefef;
+
+		.left-information{
+
+		}
+	}
+
+	.course-list{
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+	}
+}
+
+
+</style>

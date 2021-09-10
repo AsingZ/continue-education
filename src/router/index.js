@@ -17,10 +17,43 @@ const routes = [
 		component: Home
 	},
 	{
-		path: "/d",
-		name: "",
-		component: Home
+		// 管理员
+		path: "/admin",
+		name: "Admin",
+		component: ()=>import("../views/Admin"),
+
 	},
+	{
+		// 教务管理员
+		path: "/educationalAdmin",
+		name: "EducationalAdmin",
+		component: ()=>import("../views/EducationalAdmin"),
+	},
+	{
+		// 教师
+		path: "/teacher",
+		name: "Teacher",
+		component: ()=>import("../views/Teacher"),
+	},
+	{
+		// 学员
+		path: "/student",
+		name: "Student",
+		component: ()=>import("../views/Student"),
+	},
+	{
+		path: "/courseDetailed",
+		name: "CourseDetailed",
+		component: () => import("../views/CourseDetailed"),
+		children:[
+			{
+				path:"index",
+				component:()=>import("../views/studentCourse/CourseIndex"),
+			}
+
+		]
+	},
+
 ]
 
 

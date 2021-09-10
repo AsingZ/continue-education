@@ -8,6 +8,7 @@
 
 export default {
 	name: 'App',
+	// 这里面是防止刷新页面vuex数据丢失
 	created() {
 		if(localStorage.getItem("loged")){
 			this.$store.replaceState(
@@ -25,5 +26,8 @@ export default {
 </script>
 
 <style>
-
+*{
+	margin: 0;
+	padding: 0;
+}
 </style>
