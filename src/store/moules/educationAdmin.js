@@ -1,136 +1,167 @@
 export default {
 	namespaced:true,
 	state:{
-		activeName: 'list',
-		tableData: [
+		// user页的数据，
+		activeName: 'studentList',
+		departmentList:[
 			{
-				id:1,
-				account:"180015511001",
-				name: '学生1',
-				roleId:5,
-				state:0,
+				department:"计算机科学学院",
+				subject:[
+					{
+						name:"计算机科学与技术",
+						clazz:["1801","1802","1803","1804"]
+					},
+					{
+						name:"数字媒体技术",
+						clazz:["1801","1802","1803"]
+					},
+				]
 			},
 			{
-				id:2,
-				account:"180015511002",
-				name: '学生2',
-				roleId:5,
-				state:0,
+				department: "数学学院",
+				subject:[
+					{
+						name:"金融数学",
+						clazz:["1801"]
+					},
+				]
 			},
 			{
-				id:3,
-				account:"180015511003",
-				name: '学生3',
-				roleId:5,
-				state:1,
-			},
-			{
-				id:1,
-				account:"000001",
-				name: '教务管理员1',
-				roleId:2,
-				state:0,
-			},
-			{
-				id:1,
-				account:"000002",
-				name: '教师1',
-				roleId:3,
-				state:0,
-			},
-			{
-				id:2,
-				account:"000003",
-				name: '班主任1',
-				roleId:4,
-				state:0,
+				department: "体育学院",
+				subject:[
+					{
+						name:"体育与教育",
+						clazz: ["1801"]
+					},
+				]
 			},
 
 		],
-		dialogVisible: false,
-		index:0,
-		user:{
-			id:1,
-			account:"180015511001",
-			name: '学生1',
-			roleId:5,
-			state:0,
-		},
-		adduser:{
-			id:"",
-			account:"",
-			name: '',
-			roleId:null,
-			state:null,
-		},
-		/*上面是user里面数据*/
-		/*下面是permission数据*/
-		educationalAdminList:[
+		departmentSubjectClazz:[
 			{
-				key:1,
-				label:"/educational/addStudent",
+				name:"计算机科学学院",
+				children:[
+					{
+						name:"计算机科学与技术",
+						children:[
+							{
+								name:"1801"
+							},
+							{
+								name:"1802"
+							},
+							{
+								name:"1803"
+							},
+							{
+								name:"1804"
+							},
+						]
+					},
+					{
+						name:"数字媒体技术",
+						children:[
+							{
+								name:"1801"
+							},
+							{
+								name:"1802"
+							},
+							{
+								name:"1803"
+							},
+							{
+								name:"1804"
+							},
+						]
+					},
+				]
 			},
 			{
-				key:2,
-				label:"/educational/delStudent",
+				name:"数学学院",
+				children:[
+					{
+						name:"金融数学",
+						children:[
+							{
+								name:"1801"
+							},
+						]
+					}
+				]
 			},
 			{
-				key:3,
-				label:"/educational/editStudent",
-			},
-			{
-				key:4,
-				label:"/educational/searchStudent",
-			},
-			{
-				key:5,
-				label:"/educational/courseList",
-			},
-			{
-				key:6,
-				label:"/educational/addCourse",
-			},
-			{
-				key:7,
-				label:"/educational/editCourse",
-			},
-			{
-				key:8,
-				label:"/educational/addCourse",
-			},
-			{
-				key:9,
-				label:"/educational/banCourse",
-			},
-			{
-				key:10,
-				label:"/common/courseList",
-			},
-			{
-				key:11,
-				label:"/common/logedInfo",
-			},
-			{
-				key:12,
-				label:"/teacher/courseList",
-			},
-			{
-				key:13,
-				label:"/teacher/courseInfo",
-			},
-			{
-				key:14,
-				label:"/student/courseList",
-			},
-			{
-				key:15,
-				label:"/student/courseInfo",
+				name:"体育学院",
+				children:[
+					{
+						name:"体育与教育",
+						children:[
+							{
+								name:"1801"
+							},
+						]
+					}
+				]
 			},
 		],
-		educationalAdminPermissionValue:[1,2,3,4,5,6,7],
-		teacherPermissionValue:[10,11,12,13],
-		headTeacherPermissionValue:[12,13],
-		studentPermissionValue:[14,15],
+		subjectList:[],
+		clazzList:[],
+		departmentListCheck:"",
+		subjectListCheck:"",
+		clazzListCheck:"",
+		studentList:[],
+		teacherList:[],
+		studentListIndex:null,
+		teacherDepartmentCheck:"",
+		teacherListIndex:null,
+
+		// course页的数据
+		courseList:[
+			{
+				id:"123456",
+				name:"JAVA基础",
+				teacher:"教师1",
+				department:"计算机科学学院",
+				subject:"计算机科学与技术",
+			},
+			{
+				id:"654321",
+				name:"测试课程2",
+				teacher:"教师1",
+				department:"计算机科学学院",
+				subject:"计算机科学与技术",
+			},
+			{
+				id:"202021",
+				name:"测试课程3",
+				teacher:"教师1",
+				department:"计算机科学学院",
+				subject:"计算机科学与技术",
+			},
+			{
+				id:"202113",
+				name:"测试课程4",
+				teacher:"教师1",
+				department:"计算机科学学院",
+				subject:"计算机科学与技术",
+			},
+			{
+				id:"202012",
+				name:"this is 课程名",
+				teacher:"教师2",
+				department:"计算机科学学院",
+				subject:"计算机科学与技术",
+
+			},
+			{
+				id:"100416",
+				name:"测试课程5",
+				teacher:"教师1",
+				department:"计算机科学学院",
+				subject:"数字媒体技术",
+			},
+		],
+		seeCourseList:[],
 	},
 	mutations:{
 

@@ -9,6 +9,9 @@ export default {
 				name: '学生1',
 				roleId:5,
 				state:0,
+				department:"计算机科学学院",
+				subject:"计算机科学与技术",
+				clazz:"1801",
 			},
 			{
 				id:2,
@@ -16,6 +19,9 @@ export default {
 				name: '学生2',
 				roleId:5,
 				state:0,
+				department:"计算机科学学院",
+				subject:"计算机科学与技术",
+				clazz:"1801",
 			},
 			{
 				id:3,
@@ -23,6 +29,9 @@ export default {
 				name: '学生3',
 				roleId:5,
 				state:1,
+				department:"计算机科学学院",
+				subject:"计算机科学与技术",
+				clazz:"1804",
 			},
 			{
 				id:1,
@@ -30,6 +39,7 @@ export default {
 				name: '教务管理员1',
 				roleId:2,
 				state:0,
+				department:"计算机科学学院",
 			},
 			{
 				id:1,
@@ -37,6 +47,7 @@ export default {
 				name: '教师1',
 				roleId:3,
 				state:0,
+				department:"计算机科学学院",
 			},
 			{
 				id:2,
@@ -44,6 +55,15 @@ export default {
 				name: '班主任1',
 				roleId:4,
 				state:0,
+				department:"计算机科学学院",
+			},
+			{
+				id:1,
+				account:"000004",
+				name: '教师2',
+				roleId:3,
+				state:0,
+				department:"计算机科学学院",
 			},
 
 		],

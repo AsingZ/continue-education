@@ -38,11 +38,11 @@
 				<el-tab-pane label="课程列表">
 					<!-- 右边盒子 start -->
 					<div class="course-list">
-						<div v-for="a in 20">
+						<div v-for="item in educationAdminData.courseList">
 							<a onclick="window.open('./#/courseDetailed/index','course')">
-							<course-list-item courseName="课程名称"
-											  courseId="123456"
-											  teacherName="教师名称" />
+							<course-list-item :courseName="item.name"
+											  :courseId="item.id"
+											  :teacherName="item.teacher" />
 							</a>
 						</div>
 					</div>
@@ -71,7 +71,8 @@ name: "Student",
 data() {
 	return {
 		name:null,
-		drawer:false
+		drawer:false,
+		educationAdminData:this.$store.state.educationAdminData
 	}
 },
 beforeCreate(){

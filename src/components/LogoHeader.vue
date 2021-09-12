@@ -26,7 +26,7 @@
 						</el-dropdown-item>
 						<el-dropdown-item>
 							<i class="el-icon-lock"></i>
-							退出登录
+							<router-link :to="{path:'/login'}">退出登录</router-link>
 						</el-dropdown-item>
 					</el-dropdown-menu>
 				</template>

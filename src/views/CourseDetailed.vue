@@ -20,7 +20,7 @@
 					<el-menu-item index="3" style="float:right;">课程资源</el-menu-item>
 					<el-menu-item index="2" style="float:right;">基本信息</el-menu-item>
 					<el-menu-item index="1" style="float:right;">首页</el-menu-item>
-					<div class="course-name">数学建模</div>
+					<div class="course-name">JAVA基础</div>
 				</el-menu>
 			</div>
 

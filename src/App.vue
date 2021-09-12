@@ -1,3 +1,7 @@
+<!--
+	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
+-->
+
 <template>
 	<div>
 		<router-view></router-view>
