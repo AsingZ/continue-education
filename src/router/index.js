@@ -20,14 +20,40 @@ const routes = [
 		// 管理员
 		path: "/admin",
 		name: "Admin",
+		redirect:"/admin/user",
 		component: ()=>import("../views/Admin"),
+		children: [
+			{
+				path: "permission",
+				component: () => import("../views/admin/Permission")
+			},
+			{
+				path: "user",
+				component: () => import("../views/admin/User")
+			}
+		]
 
 	},
 	{
 		// 教务管理员
 		path: "/educationalAdmin",
 		name: "EducationalAdmin",
+		redirect:"/educationalAdmin/user",
 		component: ()=>import("../views/EducationalAdmin"),
+		children: [
+			{
+				path:"user",
+				component:()=>import("../views/educationalAdmin/User")
+			},
+			{
+				path:"course",
+				component:()=>import("../views/educationalAdmin/Course")
+			},
+			{
+				path:"department",
+				component:()=>import("../views/educationalAdmin/Department")
+			},
+		]
 	},
 	{
 		// 教师

@@ -1,4 +1,6 @@
 import { createStore } from 'vuex'
+import adminData from "./moules/admin"
+import educationAdminData from "@/store/moules/educationAdmin";
 
 export default createStore({
   state: {
@@ -17,5 +19,7 @@ export default createStore({
   actions: {
   },
   modules: {
+    adminData:adminData,
+    educationAdminData:educationAdminData,
   }
 })
