@@ -14,7 +14,7 @@ export default {
 				return "/educationalAdmin";
 			// 教师
 			case 3:
-				return "/teacher";
+				return "/courseManager";
 			// 班主任
 			case 4:
 				return "/teacher";

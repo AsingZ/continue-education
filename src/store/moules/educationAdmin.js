@@ -130,6 +130,8 @@ export default {
 				teacher:"教师1",
 				department:"计算机科学学院",
 				subject:"计算机科学与技术",
+				introduction:"",
+				bigG:"",
 			},
 			{
 				id:"202021",
@@ -137,6 +139,8 @@ export default {
 				teacher:"教师1",
 				department:"计算机科学学院",
 				subject:"计算机科学与技术",
+				introduction:"",
+				bigG:"",
 			},
 			{
 				id:"202113",
@@ -144,6 +148,8 @@ export default {
 				teacher:"教师1",
 				department:"计算机科学学院",
 				subject:"计算机科学与技术",
+				introduction:"",
+				bigG:"",
 			},
 			{
 				id:"202012",
@@ -151,7 +157,8 @@ export default {
 				teacher:"教师2",
 				department:"计算机科学学院",
 				subject:"计算机科学与技术",
-
+				introduction:"",
+				bigG:"",
 			},
 			{
 				id:"100416",
@@ -159,9 +166,15 @@ export default {
 				teacher:"教师1",
 				department:"计算机科学学院",
 				subject:"数字媒体技术",
+				introduction:"",
+				bigG:"",
 			},
 		],
 		seeCourseList:[],
+		/**
+		 * 这个是课程详情里面的实体
+		 */
+		courseDetailedIndex:{},
 	},
 	mutations:{
 

@@ -59,7 +59,34 @@ const routes = [
 		// 教师
 		path: "/teacher",
 		name: "Teacher",
+		redirect: "/courseManager",
 		component: ()=>import("../views/Teacher"),
+		children:[
+			{
+				path:"introduction",
+				component:()=>import("../views/teacher/Info")
+			},
+			{
+				path:"bigG",
+				component:()=>import("../views/teacher/BigG")
+			},
+			{
+				path:"teacherInfo",
+				component:()=>import("../views/teacher/TeacherInfo")
+			},
+			{
+				path: "addCourseInformation",
+				component:()=>import("../views/teacher/AddCourseInformation")
+			},
+			{
+				path: "courseInformationList",
+				component:()=>import("../views/teacher/CourseInformationList")
+			},
+			{
+				path: "resources",
+				component:()=>import("../views/teacher/Resources")
+			},
+		],
 	},
 	{
 		// 学员
@@ -75,10 +102,21 @@ const routes = [
 			{
 				path:"index",
 				component:()=>import("../views/studentCourse/CourseIndex"),
-			}
+			},
+			{
+				path:"info",
+				component:()=>import("../views/studentCourse/CourseInfo"),
+			},
 
 		]
 	},
+	{
+		path: "/courseManager",
+		name: "CourseManager",
+		component: () => import("../views/CourseManager"),
+
+	},
+
 
 ]
 

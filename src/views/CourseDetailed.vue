@@ -8,7 +8,7 @@
 			<logo-header :name="name"></logo-header>
 			<div class="nav">
 				<el-menu
-					:default-active="activeIndex2"
+					:default-active="activeIndex"
 					class="el-menu-demo"
 					mode="horizontal"
 					@select="handleSelect"
@@ -19,8 +19,8 @@
 					<el-menu-item index="4" style="float:right;">课程活动</el-menu-item>
 					<el-menu-item index="3" style="float:right;">课程资源</el-menu-item>
 					<el-menu-item index="2" style="float:right;">基本信息</el-menu-item>
-					<el-menu-item index="1" style="float:right;">首页</el-menu-item>
-					<div class="course-name">JAVA基础</div>
+					<el-menu-item index="/index" style="float:right;">首页</el-menu-item>
+					<div class="course-name">{{ educationAdminData.courseDetailedIndex.name }}</div>
 				</el-menu>
 			</div>
 
@@ -46,8 +46,8 @@ components:{
 },
 data() {
 	return {
-		activeIndex: '1',
-		activeIndex2: '1',
+		activeIndex: '/index',
+		educationAdminData:this.$store.state.educationAdminData,
 	}
 },
 methods: {

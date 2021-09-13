@@ -28,7 +28,7 @@ module.exports = {
 	// 用于显示标题
 	chainWebpack: config =>{
 		config.plugin('html').tap(args => {
-			args[0].title = '成都师范学院继续教育平台';
+			args[0].title = '高校继续教育教学平台';
 			return args;
 		})
 	},

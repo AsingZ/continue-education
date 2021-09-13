@@ -11,7 +11,7 @@
 				</template>
 				<div class="card-content">
 					<ul>
-						<li>教师名称：<span>教师1</span></li>
+						<li>教师名称：<span>{{ educationAdminData.courseDetailedIndex.teacher }}</span></li>
 						<li>所属院系：<span>计算机科学学院</span></li>
 						<li>个人简介：</li>
 					</ul>
@@ -45,7 +45,7 @@
 					<div>课程介绍</div>
 					<el-divider style="margin-top: 5px;margin-bottom: 5px"></el-divider>
 					<div class="info-txt">
-						这里是课程介绍
+						{{ educationAdminData.courseDetailedIndex.introduction }}
 					</div>
 				</div>
 				<div class="course-center-bottom">
@@ -53,10 +53,19 @@
 					<el-divider style="margin-top: 5px;margin-bottom: 0px"></el-divider>
 					<div class="info-txt">
 						<ul>
-							<li>关于教材的通知<span>2021-8-20</span></li>
-							<li>测试通知2<span>2021-8-20</span></li>
+							<li v-for="item in teacherData.courseInformationList" @click="informationDrawer(item)">
+								{{ item.title }}<span>2021-8-20</span>
+							</li>
 						</ul>
 					</div>
+					<el-drawer
+						:title="informationDrawerInfo.title"
+						v-model="drawer"
+						direction="rtl"
+						destroy-on-close>
+
+						<span>{{ informationDrawerInfo.content }}</span>
+					</el-drawer>
 				</div>
 			</div>
 		</el-main>
@@ -82,8 +91,32 @@
 </template>
 
 <script>
+import educationAdmin from "@/store/moules/educationAdmin";
+
 export default {
-	name: "CourseIndex"
+	name: "CourseIndex",
+	data(){
+		return {
+			drawer:false,
+			// 通知里面的内容
+			informationDrawerInfo:{
+				course:"",
+				title:"",
+				content:"",
+			},
+			educationAdminData:this.$store.state.educationAdminData,
+			teacherData:this.$store.state.teacherData
+		}
+	},
+	methods:{
+		/**
+		 * 打开通知的方法
+		 */
+		informationDrawer(item){
+			this.informationDrawerInfo=item;
+			this.drawer = true;
+		},
+	},
 }
 </script>
 

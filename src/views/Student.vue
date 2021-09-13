@@ -13,18 +13,18 @@
 				<el-tab-pane label="课程通知">
 					<!-- 左边盒子 start -->
 					<div class="left-information">
-						<information-item title="关于课程作业的提交通知我我我我我我我我我" checked="" />
-						<div v-for="a in 5">
-							<information-item title="测试通知" checked="" @click="drawer = true" />
+<!--						<information-item title="关于课程作业的提交通知我我我我我我我我我" checked="" />-->
+						<div v-for="item in teacherData.courseInformationList">
+							<information-item :title="item.title" checked="" @click="informationDrawer(item)" />
 						</div>
 
 						<el-drawer
-							title="测试通知"
+							:title="informationDrawerInfo.title"
 							v-model="drawer"
 							direction="rtl"
 							destroy-on-close>
 
-							<span>这里是通知内容</span>
+							<span>{{ informationDrawerInfo.content }}</span>
 						</el-drawer>
 					</div>
 					<!-- 左边盒子 end -->
@@ -39,10 +39,11 @@
 					<!-- 右边盒子 start -->
 					<div class="course-list">
 						<div v-for="item in educationAdminData.courseList">
-							<a onclick="window.open('./#/courseDetailed/index','course')">
+							<a @click="courseName(item)">
 							<course-list-item :courseName="item.name"
 											  :courseId="item.id"
-											  :teacherName="item.teacher" />
+											  :teacherName="item.teacher"
+											  />
 							</a>
 						</div>
 					</div>
@@ -72,8 +73,29 @@ data() {
 	return {
 		name:null,
 		drawer:false,
-		educationAdminData:this.$store.state.educationAdminData
+		// 通知里面的内容
+		informationDrawerInfo:{
+			course:"",
+			title:"",
+			content:"",
+		},
+		educationAdminData:this.$store.state.educationAdminData,
+		teacherData:this.$store.state.teacherData,
 	}
+},
+methods:{
+	courseName(item){
+		this.educationAdminData.courseDetailedIndex=item;
+		window.localStorage.setItem("store",JSON.stringify(this.$store.state));
+		window.open('./#/courseDetailed/index','course');
+	},
+	/**
+	 * 打开通知的方法
+	 */
+	informationDrawer(item){
+		this.informationDrawerInfo=item;
+		this.drawer = true;
+	},
 },
 beforeCreate(){
 	// 1. 先判断当前角色是否是学生
@@ -102,9 +124,7 @@ components:{
 	"course-list-item":SimpleCourseInfoItem,
 	"information-item":SimpleInformationItem,
 },
-methods:{
 
-},
 }
 </script>
 
