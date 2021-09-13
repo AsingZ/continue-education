@@ -10,6 +10,7 @@
 				<el-menu
 					:default-active="activeIndex"
 					class="el-menu-demo"
+					router="true"
 					mode="horizontal"
 					@select="handleSelect"
 					background-color="#409EFF"
@@ -18,8 +19,8 @@
 
 					<el-menu-item index="4" style="float:right;">课程活动</el-menu-item>
 					<el-menu-item index="3" style="float:right;">课程资源</el-menu-item>
-					<el-menu-item index="2" style="float:right;">基本信息</el-menu-item>
-					<el-menu-item index="/index" style="float:right;">首页</el-menu-item>
+					<el-menu-item index="/courseDetailed/info" style="float:right;">基本信息</el-menu-item>
+					<el-menu-item index="/courseDetailed/index" style="float:right;">首页</el-menu-item>
 					<div class="course-name">{{ educationAdminData.courseDetailedIndex.name }}</div>
 				</el-menu>
 			</div>
@@ -46,7 +47,7 @@ components:{
 },
 data() {
 	return {
-		activeIndex: '/index',
+		activeIndex: '/courseDetailed/index',
 		educationAdminData:this.$store.state.educationAdminData,
 	}
 },
